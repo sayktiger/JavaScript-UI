@@ -8,8 +8,8 @@ $('button').on(`click`, function(){
 
 $(`div`).setAtr(`data-btn`, `lalala`);
 
-$(`div`).removeAtr(`data-btn`);
+$(`div`).fadeIn(1800);
+$(`button`).fadeOut(1800);
 
-console.log($(`div`).eq(2).find(`.three`));
-console.log($(`.one`).eq(1).siblings());
+
 

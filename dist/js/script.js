@@ -3658,39 +3658,6 @@ addToUnscopables(FIND_INDEX);
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/es.array.find.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/core-js/modules/es.array.find.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
-var $find = __webpack_require__(/*! ../internals/array-iteration */ "./node_modules/core-js/internals/array-iteration.js").find;
-var addToUnscopables = __webpack_require__(/*! ../internals/add-to-unscopables */ "./node_modules/core-js/internals/add-to-unscopables.js");
-
-var FIND = 'find';
-var SKIPS_HOLES = true;
-
-// Shouldn't skip holes
-if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.find` method
-// https://tc39.es/ecma262/#sec-array.prototype.find
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES }, {
-  find: function find(callbackfn /* , that = undefined */) {
-    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND);
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/modules/es.array.from.js":
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.from.js ***!
@@ -4706,6 +4673,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_handler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/handler */ "./src/js/lib/modules/handler.js");
 /* harmony import */ var _modules_attribute__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attribute */ "./src/js/lib/modules/attribute.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
+/* harmony import */ var _modules_effect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effect */ "./src/js/lib/modules/effect.js");
+
 
 
 
@@ -5000,6 +4969,73 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggle = function () {
 
 /***/ }),
 
+/***/ "./src/js/lib/modules/effect.js":
+/*!**************************************!*\
+  !*** ./src/js/lib/modules/effect.js ***!
+  \**************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animateOverTime = function (duration, callback, fin) {
+  var timeStart;
+  function _animateOverTime(time) {
+    if (!timeStart) {
+      timeStart = time;
+    }
+    var timeElapsed = time - timeStart;
+    var complection = Math.min(timeElapsed / duration, 1);
+    callback(complection);
+    if (timeElapsed < duration) {
+      requestAnimationFrame(_animateOverTime);
+    } else {
+      if (typeof fin === "function") {
+        fin();
+      }
+    }
+  }
+  return _animateOverTime;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (dur) {
+  var _this = this;
+  var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "block";
+  var fin = arguments.length > 2 ? arguments[2] : undefined;
+  var _loop = function _loop(i) {
+    _this[i].style.display = display;
+    var _fadeIn = function _fadeIn(complection) {
+      _this[i].style.opacity = complection;
+    };
+    var ani = _this.animateOverTime(dur, _fadeIn, fin);
+    requestAnimationFrame(ani);
+  };
+  for (var i = 0; i < this.length; i++) {
+    _loop(i);
+  }
+  return this;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dur, fin) {
+  var _this2 = this;
+  var _loop2 = function _loop2(i) {
+    var _fadeOut = function _fadeOut(complection) {
+      _this2[i].style.opacity = 1 - complection;
+      if (complection === 1) {
+        _this2[i].style.display = 'none';
+      }
+    };
+    var ani = _this2.animateOverTime(dur, _fadeOut, fin);
+    requestAnimationFrame(ani);
+  };
+  for (var i = 0; i < this.length; i++) {
+    _loop2(i);
+  }
+  return this;
+};
+
+/***/ }),
+
 /***/ "./src/js/lib/modules/handler.js":
 /*!***************************************!*\
   !*** ./src/js/lib/modules/handler.js ***!
@@ -5051,21 +5087,14 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (handle
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
-
-
+/* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
 
 $('button').on("click", function () {
   $(this).toggleClass("active");
 });
 $("div").setAtr("data-btn", "lalala");
-$("div").removeAtr("data-btn");
-console.log($("div").eq(2).find(".three"));
-console.log($(".one").eq(1).siblings());
+$("div").fadeIn(1800);
+$("button").fadeOut(1800);
 
 /***/ })
 

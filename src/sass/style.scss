@@ -3,3 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.active{
+    font-size: 20px;
+    text-align: center;
+    color: red;
+}
+
+button {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    color: white;
+    background-color: lightcoral;
+    margin-top: 20px;
+}

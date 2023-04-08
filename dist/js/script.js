@@ -4829,6 +4829,44 @@ _core__WEBPACK_IMPORTED_MODULE_15__["default"].prototype.find = function (select
   }
   return this;
 };
+_core__WEBPACK_IMPORTED_MODULE_15__["default"].prototype.closest = function (selector) {
+  var counter = 0;
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].closest(selector) == null) {
+      continue;
+    } else {
+      this[i] = this[i].closest(selector);
+      counter++;
+    }
+  }
+  var objLength = Object.keys(this).length;
+  for (; counter < objLength; counter++) {
+    delete this[counter];
+  }
+  return this;
+};
+_core__WEBPACK_IMPORTED_MODULE_15__["default"].prototype.siblings = function () {
+  var numberOfItems = 0;
+  var counter = 0;
+  var copyObj = Object.assign({}, this);
+  for (var i = 0; i < copyObj.length; i++) {
+    var arr = copyObj[i].parentNode.children;
+    for (var j = 0; j < arr.length; j++) {
+      if (copyObj[i] === arr[j]) {
+        continue;
+      }
+      this[counter] = arr[j];
+      counter++;
+    }
+    numberOfItems += arr.length - 1;
+  }
+  this.length = numberOfItems;
+  var objLength = Object.keys(this).length;
+  for (; numberOfItems < objLength; numberOfItems++) {
+    delete this[numberOfItems];
+  }
+  return this;
+};
 
 /***/ }),
 
@@ -5027,6 +5065,7 @@ $('button').on("click", function () {
 $("div").setAtr("data-btn", "lalala");
 $("div").removeAtr("data-btn");
 console.log($("div").eq(2).find(".three"));
+console.log($(".one").eq(1).siblings());
 
 /***/ })
 

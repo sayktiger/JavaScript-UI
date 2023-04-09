@@ -4624,6 +4624,33 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/lib/components/dropdown.js":
+/*!*******************************************!*\
+  !*** ./src/js/lib/components/dropdown.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
+  var _this = this;
+  var _loop = function _loop() {
+    var id = _this[i].getAttribute('id');
+    Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(_this[i]).click(function () {
+      Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])("[data-toggle-id=\"".concat(id, "\"]")).fadeToggle(300);
+    });
+  };
+  for (var i = 0; i < this.length; i++) {
+    _loop();
+  }
+};
+Object(_core__WEBPACK_IMPORTED_MODULE_0__["default"])(".dropdown-toggle").dropdown();
+
+/***/ }),
+
 /***/ "./src/js/lib/core.js":
 /*!****************************!*\
   !*** ./src/js/lib/core.js ***!
@@ -4674,12 +4701,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_attribute__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attribute */ "./src/js/lib/modules/attribute.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
 /* harmony import */ var _modules_effect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effect */ "./src/js/lib/modules/effect.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/lib/components/dropdown.js");
+
+
+//Технические функции
 
 
 
 
 
 
+
+//Функции компонентов
 
 /* harmony default export */ __webpack_exports__["default"] = (_core__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
@@ -5033,13 +5066,11 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dur,
   }
   return this;
 };
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (duration) {
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (dur, display, fin) {
   var _this3 = this;
-  var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "block";
-  var finall = arguments.length > 2 ? arguments[2] : undefined;
   var _loop3 = function _loop3(i) {
     if (window.getComputedStyle(_this3[i]).display === 'none') {
-      _this3[i].style.display = display;
+      _this3[i].style.display = "block";
       var _fadeIn = function _fadeIn(complection) {
         _this3[i].style.opacity = complection;
       };
@@ -5052,7 +5083,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (d
           _this3[i].style.display = 'none';
         }
       };
-      var _ani = _this3.animateOverTime(duration, _fadeOut, finall);
+      var _ani = _this3.animateOverTime(dur, _fadeOut, fin);
       requestAnimationFrame(_ani);
     }
   };
@@ -5117,8 +5148,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (handle
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
 
-$("[data-btn]").fadeToggle(1800);
-$("[data-btn]").fadeToggle(1800);
 
 /***/ })
 

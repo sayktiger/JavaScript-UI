@@ -57,10 +57,10 @@ $.prototype.fadeOut = function(dur, fin){
 }
 
 
-$.prototype.fadeToggle = function(duration, display = `block`, finall){
+$.prototype.fadeToggle = function(dur, display, fin){
     for(let i = 0; i < this.length; i++){
         if(window.getComputedStyle(this[i]).display === 'none'){
-            this[i].style.display = display;
+            this[i].style.display = `block`;
 
             const _fadeIn = (complection) =>{
                 this[i].style.opacity = complection;
@@ -77,7 +77,7 @@ $.prototype.fadeToggle = function(duration, display = `block`, finall){
                 }
             }
     
-            const ani = this.animateOverTime(duration, _fadeOut, finall);
+            const ani = this.animateOverTime(dur, _fadeOut, fin);
     
             requestAnimationFrame(ani);
         }

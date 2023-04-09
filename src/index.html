@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div>1</div>
-    <div class="active">2</div>
-    <div>
-        <div class="one">1</div>
-        <div class="two">2</div>
-        <div class="two">2</div>
-        <div class="one">1</div>
-        <div class="three">3</div>
-        <div class="one">1</div>
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" id="#dropdownmenu">Dropdown menu</button>
+            <div class="dropdown__list" data-toggle-id = "#dropdownmenu">
+                <a href="" class="dropdown__link">Active 1</a>
+                <a href="" class="dropdown__link">Active 2</a>
+                <a href="" class="dropdown__link">Active 3</a>
+            </div>
+        </div>
     </div>
-    <div data-active class="passive">3</div>
-    <button class="btn">click me</button>
+
+
+
     <script src='js/script.js'></script>
 </body>
 </html>

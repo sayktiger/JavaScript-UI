@@ -226,7 +226,6 @@
   font-size: 14px;
   line-height: 1.5;
   transition: all 0.2s;
-  display: none;
 }
 .btn:hover {
   background-color: #357fff;
@@ -310,4 +309,29 @@
 .btn-block {
   display: block;
   width: 100%;
+}
+
+.dropdown {
+  position: relative;
+  margin: 10px 0;
+  display: inline-block;
+}
+.dropdown__list {
+  position: absolute;
+  min-width: 100%;
+  z-index: 2;
+  background-color: #fff;
+  top: 100%;
+  display: none;
+}
+.dropdown__link {
+  display: block;
+  margin: 10px 0;
+  background-color: transparent;
+  color: #343a40;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.dropdown__link:hover {
+  color: rgba(52, 58, 64, 0.8);
 }

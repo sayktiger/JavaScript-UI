@@ -1,15 +1,9 @@
 import './lib/lib';
 
 
+$(`[data-btn]`).fadeToggle(1800);
+$(`[data-btn]`).fadeToggle(1800)
 
-$('button').on(`click`, function(){
-    $(this).toggleClass(`active`);
-});
-
-$(`div`).setAtr(`data-btn`, `lalala`);
-
-$(`div`).fadeIn(1800);
-$(`button`).fadeOut(1800);
 
 
 

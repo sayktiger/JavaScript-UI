@@ -5033,6 +5033,34 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dur,
   }
   return this;
 };
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (duration) {
+  var _this3 = this;
+  var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "block";
+  var finall = arguments.length > 2 ? arguments[2] : undefined;
+  var _loop3 = function _loop3(i) {
+    if (window.getComputedStyle(_this3[i]).display === 'none') {
+      _this3[i].style.display = display;
+      var _fadeIn = function _fadeIn(complection) {
+        _this3[i].style.opacity = complection;
+      };
+      var ani = _this3.animateOverTime(dur, _fadeIn, fin);
+      requestAnimationFrame(ani);
+    } else {
+      var _fadeOut = function _fadeOut(complection) {
+        _this3[i].style.opacity = 1 - complection;
+        if (complection === 1) {
+          _this3[i].style.display = 'none';
+        }
+      };
+      var _ani = _this3.animateOverTime(duration, _fadeOut, finall);
+      requestAnimationFrame(_ani);
+    }
+  };
+  for (var i = 0; i < this.length; i++) {
+    _loop3(i);
+  }
+  return this;
+};
 
 /***/ }),
 
@@ -5089,12 +5117,8 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (handle
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
 
-$('button').on("click", function () {
-  $(this).toggleClass("active");
-});
-$("div").setAtr("data-btn", "lalala");
-$("div").fadeIn(1800);
-$("button").fadeOut(1800);
+$("[data-btn]").fadeToggle(1800);
+$("[data-btn]").fadeToggle(1800);
 
 /***/ })
 
